@@ -19,7 +19,7 @@ public class Player extends CharacterBody implements KeyListener {
     }
 
     State currentState = State.IDLE;
-    int speed = 32;
+    int speed = 8;
 
     public Player() {
         this.health = 1;
@@ -30,7 +30,26 @@ public class Player extends CharacterBody implements KeyListener {
 
     @Override
     public void handleMove() {
-        // Todo: Implement the movement of the player 
+        switch (currentState) {
+            case State.LEFT:
+                this.position.setX(this.position.getX() - speed);
+                break;
+
+            case State.RIGHT:
+                this.position.setX(this.position.getX() + speed);
+                break;
+
+            case State.UP:
+                this.position.setY(this.position.getY() - speed);
+                break;
+ 
+            case State.DOWN:
+                this.position.setY(this.position.getY() + speed);
+                break;
+                
+            default:
+                break;
+        }
     }
 
     @Override
@@ -40,27 +59,23 @@ public class Player extends CharacterBody implements KeyListener {
 
     @Override
     public void keyTyped(KeyEvent e) {
-    }
-
-    @Override
-    public void keyPressed(KeyEvent e) {
-    }
-
-    @Override
-    public void keyReleased(KeyEvent e) {
-        if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-            // currentState = State.LEFT;
-            this.position.setX(this.position.getX() - speed);
-        } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-            // currentState = State.RIGHT;
-            this.position.setX(this.position.getX() + speed);
-        } else if (e.getKeyCode() == KeyEvent.VK_UP) {
-            // currentState = State.UP;
-            this.position.setY(this.position.getY() - speed);
-        } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-            // currentState = State.DOWN;
-            this.position.setY(this.position.getY() + speed);
+        if (e.getKeyChar() == 'a') {
+            currentState = State.LEFT;
+        } else if (e.getKeyChar() == 'd') {
+            currentState = State.RIGHT;
+        } else if (e.getKeyChar() == 'w') {
+            currentState = State.UP;
+        } else if (e.getKeyChar() == 's') {
+            currentState = State.DOWN;
         }
     }
+    
+    @Override
+    public void keyReleased(KeyEvent e) {
+        currentState = State.IDLE;
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {}
     
 }
