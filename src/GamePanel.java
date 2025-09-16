@@ -2,6 +2,7 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 
 import characters.Player;
+import util.KeyHandler;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -14,20 +15,21 @@ import java.awt.event.ActionListener;
 public class GamePanel extends JPanel implements ActionListener {
 
     Timer gameLoop;
-    Player player = new Player();
+    KeyHandler keyHandler = new KeyHandler();
+    Player player = new Player(keyHandler);
 
     public GamePanel() {
         setBackground(new Color(0x0d001a));
         setVisible(true);
         setFocusable(true);
-        addKeyListener(player);
+        addKeyListener(keyHandler);
 
-        gameLoop = new Timer(1000/60, this);
+        gameLoop = new Timer(1000 / 60, this);
 
         gameLoop.start();
     }
 
-    /* 
+    /*
      * Game loop of the game than will be executed 60
      * times per second
      */
@@ -47,11 +49,10 @@ public class GamePanel extends JPanel implements ActionListener {
 
         // Drawing the player
         g.drawImage(
-            player.getSprite(), 
-            player.getPosition().getX(), 
-            player.getPosition().getY(),
-            null
-            );
+                player.getSprite(),
+                player.getPosition().getX(),
+                player.getPosition().getY(),
+                null);
     }
 
 }
