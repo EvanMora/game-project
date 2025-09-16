@@ -10,7 +10,11 @@ A game of a ship which has to eliminate aliens based on space Invaders
 
 ## How to start the game?
 1. Clone the repository
-``` git clone ```
+```bash
+git clone https://github.com/EvanMora/game-project.git
+```
 
 2. On the main folder run
-``` java src/Main.java```
+```bash
+java src/Main.java
+```
