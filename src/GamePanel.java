@@ -1,6 +1,8 @@
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+import characters.Player;
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
@@ -12,10 +14,13 @@ import java.awt.event.ActionListener;
 public class GamePanel extends JPanel implements ActionListener {
 
     Timer gameLoop;
+    Player player = new Player();
 
     public GamePanel() {
         setBackground(new Color(0x0d001a));
         setVisible(true);
+        setFocusable(true);
+        addKeyListener(player);
 
         gameLoop = new Timer(1000/60, this);
 
@@ -37,6 +42,14 @@ public class GamePanel extends JPanel implements ActionListener {
      */
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
+
+        // Drawing the player
+        g.drawImage(
+            player.getSprite(), 
+            player.getPosition().getX(), 
+            player.getPosition().getY(),
+            null
+            );
     }
 
 }

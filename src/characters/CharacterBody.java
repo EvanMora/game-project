@@ -6,11 +6,11 @@ import util.Block;
 import util.Vector;
 
 public abstract class CharacterBody {
-    private int health;
-    private Vector position;
+    protected int health;
+    protected Vector position;
     // Vector velocity;
-    private Block collider;
-    private Image sprite;  
+    protected Block collider;
+    protected Image sprite;  
 
     public int getHealth() {
         return health;

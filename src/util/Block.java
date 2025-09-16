@@ -5,11 +5,9 @@ package util;
  * of the each object
  */
 public class Block {
-    Vector position;
     int height, width;
 
-    public Block(int x, int y, int height, int width) {
-        this.position = new Vector(x, y);
+    public Block(int height, int width) {
         this.height = height;
         this.width = width;
     }
