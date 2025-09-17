@@ -1,16 +1,14 @@
 package main;
 
-import javax.swing.JPanel;
-import javax.swing.Timer;
-
 import characters.Player;
-import util.KeyHandler;
-
-import java.awt.Dimension;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JPanel;
+import javax.swing.Timer;
+import util.KeyHandler;
 
 /*
  * Principal class of the game which define the game loop
@@ -55,6 +53,7 @@ public class GamePanel extends JPanel implements ActionListener {
      * Will paint the different images or components
      * of the game
      */
+    @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
