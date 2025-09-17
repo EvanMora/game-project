@@ -1,5 +1,6 @@
 package characters;
 
+import java.awt.Graphics;
 import java.awt.Image;
 
 import util.Block;
@@ -36,7 +37,8 @@ public abstract class CharacterBody {
         this.sprite = sprite;
     }
 
-    public abstract void handleMove();
+    public abstract void update();
+    public abstract void draw(Graphics g);
     public abstract void attack();
 
     protected void die() {
