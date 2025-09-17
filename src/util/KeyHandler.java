@@ -22,6 +22,16 @@ public class KeyHandler implements KeyListener {
             case KeyEvent.VK_S -> downPressed = true;
             case KeyEvent.VK_W -> upPressed = true;
         }
+
+        /*
+        switch (key) {
+            case KeyEvent.VK_KP_LEFT -> leftPressed = true;
+            case KeyEvent.VK_KP_RIGHT -> rightPressed = true;
+            case KeyEvent.VK_KP_DOWN -> downPressed = true;
+            case KeyEvent.VK_KP_UP -> upPressed = true;
+        }
+         */
+
     }
 
     @Override
@@ -34,9 +44,17 @@ public class KeyHandler implements KeyListener {
             case KeyEvent.VK_D -> rightPressed = false;
             case KeyEvent.VK_S -> downPressed = false;
             case KeyEvent.VK_W -> upPressed = false;
-            default -> {
-            }
         }
+        
+        /*
+        switch (key) {
+            case KeyEvent.VK_KP_LEFT -> leftPressed = true;
+            case KeyEvent.VK_KP_RIGHT -> rightPressed = true;
+            case KeyEvent.VK_KP_DOWN -> downPressed = true;
+            case KeyEvent.VK_KP_UP -> upPressed = true;
+        }
+         */
+
     }
 
 }

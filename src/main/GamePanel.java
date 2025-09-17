@@ -1,5 +1,6 @@
 package main;
 
+import characters.BasicEnemy;
 import characters.Player;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -24,6 +25,7 @@ public class GamePanel extends JPanel implements ActionListener {
     Timer gameLoop;
     KeyHandler keyHandler = new KeyHandler();
     Player player = new Player(this, keyHandler);
+    BasicEnemy enemy = new BasicEnemy(this);
 
     public GamePanel() {
         setBackground(new Color(0x0d001a));
@@ -47,6 +49,7 @@ public class GamePanel extends JPanel implements ActionListener {
         repaint();
 
         player.update();
+        enemy.update();
     }
 
     /*
@@ -58,6 +61,7 @@ public class GamePanel extends JPanel implements ActionListener {
         super.paintComponent(g);
 
         player.draw(g);
+        enemy.draw(g);
     }
 
 }
