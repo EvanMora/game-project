@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import javax.swing.ImageIcon;
 
 import main.GamePanel;
+import objects.NormalBullet;
 import util.Block;
 import util.KeyHandler;
 import util.Vector;
@@ -39,6 +40,9 @@ public class Player extends CharacterBody {
 
         else if (keyH.downPressed && position.getY() + speed <= (gp.height - collider.getHeight()))
             position.setY(position.getY() + speed);
+
+        if (keyH.spacePressed)
+            attack();
     }
 
     @Override
@@ -53,7 +57,9 @@ public class Player extends CharacterBody {
 
     @Override
     public void attack() {
-        // Todo: Implement the shot of the ship
+        gp.addBullet(new NormalBullet(
+            position.getX() + collider.getWidth() / 2, 
+            position.getY()));
     }
 
 }
