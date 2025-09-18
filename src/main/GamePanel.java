@@ -29,7 +29,6 @@ public class GamePanel extends JPanel implements ActionListener {
 
     public GamePanel() {
         setBackground(new Color(0x0d001a));
-        setVisible(true);
         setPreferredSize(new Dimension(width, height));
         setFocusable(true);
         requestFocus();
