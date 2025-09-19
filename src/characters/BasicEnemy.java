@@ -18,7 +18,7 @@ public class BasicEnemy extends CharacterBody {
     public BasicEnemy(GamePanel gp) {
         this.health = 1;
         this.position = new Vector(32, 32);
-        this.collider = new Block(64, 64);
+        this.collider = new Block(2 * gp.tileSize, 2 * gp.tileSize);
         this.sprite = new ImageIcon("assets/alien.png").getImage();
         this.gp = gp;
     }
@@ -47,6 +47,8 @@ public class BasicEnemy extends CharacterBody {
                 getSprite(),
                 getPosition().getX(),
                 getPosition().getY(),
+                collider.getHeight(),
+                collider.getWidth(),
                 null);
     }
 

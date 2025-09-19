@@ -1,8 +1,10 @@
 package characters;
 
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
 
 import javax.swing.ImageIcon;
+import javax.swing.Timer;
 
 import main.GamePanel;
 import objects.NormalBullet;
@@ -12,7 +14,11 @@ import util.Vector;
 
 public class Player extends CharacterBody {
 
-    int speed = 4;
+    int speed = 8;
+    
+    int shotDelay = 1000/3;
+    boolean canShot = true;
+    Timer shotDelayTimer = new Timer(shotDelay, (ActionEvent e) -> canShot = true);
 
     GamePanel gp;
     KeyHandler keyH;
@@ -20,7 +26,7 @@ public class Player extends CharacterBody {
     public Player(GamePanel gp, KeyHandler keyH) {
         this.health = 1;
         this.position = new Vector(32, 32);
-        this.collider = new Block(32, 64);
+        this.collider = new Block(gp.tileSize, 2 * gp.tileSize);
         this.sprite = new ImageIcon("assets/ship.png").getImage();
         this.keyH = keyH;
         this.gp = gp;
@@ -41,7 +47,7 @@ public class Player extends CharacterBody {
         else if (keyH.downPressed && position.getY() + speed <= (gp.height - collider.getHeight()))
             position.setY(position.getY() + speed);
 
-        if (keyH.spacePressed)
+        if (keyH.spacePressed && canShot)
             attack();
     }
 
@@ -52,11 +58,16 @@ public class Player extends CharacterBody {
                 getSprite(),
                 getPosition().getX(),
                 getPosition().getY(),
+                collider.getWidth(),
+                collider.getHeight(),
                 null);
     }
 
     @Override
     public void attack() {
+        canShot = false;
+        shotDelayTimer.start();
+        
         gp.addBullet(new NormalBullet(
             position.getX() + collider.getWidth() / 2, 
             position.getY()));

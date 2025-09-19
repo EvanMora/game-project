@@ -20,7 +20,10 @@ import util.KeyHandler;
  */
 public class GamePanel extends JPanel implements ActionListener {
     // Data of the window
-    public final int tileSize = 32;
+    public final int originalTileSize = 16;
+    public final int scale = 3;
+
+    public final int tileSize = originalTileSize * scale;
     public final int rows = 16;
     public final int columns = 16;
     public final int height = rows * tileSize;
