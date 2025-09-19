@@ -9,6 +9,8 @@ import util.Vector;
 public abstract class CharacterBody {
     protected int health;
     protected Vector position;
+    protected boolean visible = true;
+    protected boolean alive = true;
     // Vector velocity;
     protected Block collider;
     protected Image sprite;  
@@ -41,7 +43,22 @@ public abstract class CharacterBody {
     public abstract void draw(Graphics g);
     public abstract void attack();
 
-    protected void die() {
+    public void die() {
         health = 0;
+        visible = false;
+        alive = false;
     }
+
+    public boolean isVisible() {
+        return visible;
+    }
+
+    public void setVisible(boolean visible) {
+        this.visible = visible;
+    }
+
+    public boolean isAlive() {
+        return alive;
+    }
+
 }

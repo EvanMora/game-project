@@ -7,6 +7,7 @@ import javax.swing.ImageIcon;
 import javax.swing.Timer;
 
 import main.GamePanel;
+import objects.Bullet;
 import objects.NormalBullet;
 import util.Block;
 import util.KeyHandler;
@@ -16,7 +17,7 @@ public class Player extends CharacterBody {
 
     int speed = 8;
     
-    int shotDelay = 1000/3;
+    int shotDelay = 1000/2;
     boolean canShot = true;
     Timer shotDelayTimer = new Timer(shotDelay, (ActionEvent e) -> canShot = true);
 
@@ -53,6 +54,8 @@ public class Player extends CharacterBody {
 
     @Override
     public void draw(Graphics g) {
+        if (!visible) return;
+        
         // Drawing the player
         g.drawImage(
                 getSprite(),
@@ -68,9 +71,12 @@ public class Player extends CharacterBody {
         canShot = false;
         shotDelayTimer.start();
         
-        gp.addBullet(new NormalBullet(
+        Bullet b = new NormalBullet(
             position.getX() + collider.getWidth() / 2, 
-            position.getY()));
+            position.getY());
+        
+        b.getPosition().setX(b.getPosition().getX() - b.getCollider().getWidth() / 2);
+        gp.addBullet(b);
     }
 
 }

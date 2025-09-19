@@ -85,12 +85,12 @@ public class GamePanel extends JPanel implements ActionListener {
             }
 
             // Enemy colission (ONLY WORKS FOR ONE ENEMY)
-            // if (enemy.isAlive() && b.getBounds().intersects(enemy.getBounds())) {
-            //     enemy.setAlive(false);
-            //     b.setActive(false);
-            //     bullets.remove(i);
-            //     i--;
-            // }
+            if (enemy.isAlive() && b.getBounds().intersects(enemy.getBounds())) {
+                enemy.die();
+                b.setActive(false);
+                bullets.remove(i);
+                i--;
+            }
         }
 
     }

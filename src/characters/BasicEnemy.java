@@ -1,6 +1,8 @@
 package characters;
 
 import java.awt.Graphics;
+import java.awt.Rectangle;
+
 import javax.swing.ImageIcon;
 import main.GamePanel;
 import util.Block;
@@ -41,8 +43,18 @@ public class BasicEnemy extends CharacterBody {
 
     }
 
+    public Rectangle getBounds() {
+        return new Rectangle(
+            position.getX(), 
+            position.getY(), 
+            collider.getWidth(), 
+            collider.getHeight());
+    }
+
     @Override
-    public void draw(Graphics g){
+    public void draw(Graphics g) {
+        if (!visible) return;
+
         g.drawImage(
                 getSprite(),
                 getPosition().getX(),

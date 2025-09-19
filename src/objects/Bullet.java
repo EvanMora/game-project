@@ -4,14 +4,14 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
+import util.Block;
 import util.Vector;
 
 public abstract class Bullet {
     
     protected Vector position;
     protected int speed;
-    protected int width;
-    protected int height;
+    protected Block collider;
     protected boolean active = true;
     protected Color color;
 
@@ -24,11 +24,11 @@ public abstract class Bullet {
 
     public void draw(Graphics g) {
         g.setColor(color);
-        g.fillRect(position.getX(), position.getY(), width, height);
+        g.fillRect(position.getX(), position.getY(), collider.getWidth() , collider.getHeight());
     }
 
     public Rectangle getBounds() {
-        return new Rectangle(position.getX(), position.getY(), width, height);
+        return new Rectangle(position.getX(), position.getY(), collider.getWidth(), collider.getHeight());
     }
 
     public boolean isActive() { return active; }
@@ -36,4 +36,6 @@ public abstract class Bullet {
     public void setActive(boolean active) { this.active = active; }
 
     public Vector getPosition() { return position; }
+
+    public Block getCollider() { return collider; }
 }
