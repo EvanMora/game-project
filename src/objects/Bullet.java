@@ -8,7 +8,7 @@ import util.Block;
 import util.Vector;
 
 public abstract class Bullet {
-    
+
     protected Vector position;
     protected int speed;
     protected Block collider;
@@ -24,18 +24,26 @@ public abstract class Bullet {
 
     public void draw(Graphics g) {
         g.setColor(color);
-        g.fillRect(position.getX(), position.getY(), collider.getWidth() , collider.getHeight());
+        g.fillRect(position.getX(), position.getY(), collider.getWidth(), collider.getHeight());
     }
 
     public Rectangle getBounds() {
         return new Rectangle(position.getX(), position.getY(), collider.getWidth(), collider.getHeight());
     }
 
-    public boolean isActive() { return active; }
+    public boolean isActive() {
+        return active;
+    }
 
-    public void setActive(boolean active) { this.active = active; }
+    public void setActive(boolean active) {
+        this.active = active;
+    }
 
-    public Vector getPosition() { return position; }
+    public Vector getPosition() {
+        return position;
+    }
 
-    public Block getCollider() { return collider; }
+    public Block getCollider() {
+        return collider;
+    }
 }

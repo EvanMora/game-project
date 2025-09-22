@@ -12,7 +12,7 @@ public class Game {
         JFrame window = new JFrame("Space Invaders");
         window.setResizable(false);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
+
         GamePanel gamePanel = new GamePanel();
         window.add(gamePanel);
 

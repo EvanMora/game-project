@@ -1,4 +1,5 @@
 package objects;
+
 import java.awt.Color;
 
 import util.Block;
@@ -15,7 +16,7 @@ public class NormalBullet extends Bullet {
     public void update() {
         position.setY(position.getY() - speed);
 
-        if (position.getY() < 0) 
+        if (position.getY() < 0)
             active = false;
     }
 

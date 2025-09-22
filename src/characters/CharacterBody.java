@@ -13,7 +13,7 @@ public abstract class CharacterBody {
     protected boolean alive = true;
     // Vector velocity;
     protected Block collider;
-    protected Image sprite;  
+    protected Image sprite;
 
     public int getHealth() {
         return health;
@@ -40,7 +40,9 @@ public abstract class CharacterBody {
     }
 
     public abstract void update();
+
     public abstract void draw(Graphics g);
+
     public abstract void attack();
 
     public void die() {

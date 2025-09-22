@@ -69,7 +69,7 @@ public class GamePanel extends JPanel implements ActionListener {
             Bullet b = bullets.get(i);
 
             if (!b.isActive()) {
-                
+
                 bullets.remove(i);
                 i--;
                 continue;
@@ -77,7 +77,6 @@ public class GamePanel extends JPanel implements ActionListener {
 
             b.update();
 
-            
             if (b.getPosition().getY() < 0) {
                 bullets.remove(i);
                 i--;

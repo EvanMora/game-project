@@ -26,6 +26,7 @@ public class BasicEnemy extends CharacterBody {
     }
 
     boolean movingRight = true;
+
     @Override
     public void update() {
         // Detects when collide
@@ -36,24 +37,25 @@ public class BasicEnemy extends CharacterBody {
             movingRight = true;
 
         // Movement
-        if (movingRight) 
+        if (movingRight)
             position.setX(position.getX() + speed);
-        else 
+        else
             position.setX(position.getX() - speed);
 
     }
 
     public Rectangle getBounds() {
         return new Rectangle(
-            position.getX(), 
-            position.getY(), 
-            collider.getWidth(), 
-            collider.getHeight());
+                position.getX(),
+                position.getY(),
+                collider.getWidth(),
+                collider.getHeight());
     }
 
     @Override
     public void draw(Graphics g) {
-        if (!visible) return;
+        if (!visible)
+            return;
 
         g.drawImage(
                 getSprite(),
@@ -65,5 +67,6 @@ public class BasicEnemy extends CharacterBody {
     }
 
     @Override
-    public void attack(){}
-}   
+    public void attack() {
+    }
+}

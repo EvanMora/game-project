@@ -5,13 +5,13 @@ package util;
  * of the each object
  */
 public class Block {
-    int height, width;
+    private int height, width;
 
     public Block(int height, int width) {
         this.height = height;
         this.width = width;
     }
-    
+
     public void setHeight(int height) {
         this.height = height;
     }

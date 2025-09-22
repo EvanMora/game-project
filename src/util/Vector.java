@@ -5,7 +5,7 @@ package util;
  * velocity 
  */
 public class Vector {
-    int x, y;
+    private int x, y;
 
     public Vector(int x, int y) {
         this.x = x;
@@ -27,5 +27,5 @@ public class Vector {
     public void setY(int y) {
         this.y = y;
     }
-    
+
 }

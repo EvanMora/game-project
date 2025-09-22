@@ -16,8 +16,8 @@ import util.Vector;
 public class Player extends CharacterBody {
 
     int speed = 8;
-    
-    int shotDelay = 1000/2;
+
+    int shotDelay = 1000 / 2;
     boolean canShot = true;
     Timer shotDelayTimer = new Timer(shotDelay, (ActionEvent e) -> canShot = true);
 
@@ -54,8 +54,9 @@ public class Player extends CharacterBody {
 
     @Override
     public void draw(Graphics g) {
-        if (!visible) return;
-        
+        if (!visible)
+            return;
+
         // Drawing the player
         g.drawImage(
                 getSprite(),
@@ -70,11 +71,11 @@ public class Player extends CharacterBody {
     public void attack() {
         canShot = false;
         shotDelayTimer.start();
-        
+
         Bullet b = new NormalBullet(
-            position.getX() + collider.getWidth() / 2, 
-            position.getY());
-        
+                position.getX() + collider.getWidth() / 2,
+                position.getY());
+
         b.getPosition().setX(b.getPosition().getX() - b.getCollider().getWidth() / 2);
         gp.addBullet(b);
     }
