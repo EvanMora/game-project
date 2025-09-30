@@ -60,8 +60,8 @@ public class Player extends CharacterBody {
         // Drawing the player
         g.drawImage(
                 getSprite(),
-                getPosition().getX(),
-                getPosition().getY(),
+                (int) getPosition().getX(),
+                (int) getPosition().getY(),
                 collider.getWidth(),
                 collider.getHeight(),
                 null);

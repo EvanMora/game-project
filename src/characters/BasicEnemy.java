@@ -46,8 +46,8 @@ public class BasicEnemy extends CharacterBody {
 
     public Rectangle getBounds() {
         return new Rectangle(
-                position.getX(),
-                position.getY(),
+                (int) position.getX(),
+                (int) position.getY(),
                 collider.getWidth(),
                 collider.getHeight());
     }
@@ -59,8 +59,8 @@ public class BasicEnemy extends CharacterBody {
 
         g.drawImage(
                 getSprite(),
-                getPosition().getX(),
-                getPosition().getY(),
+                (int) getPosition().getX(),
+                (int) getPosition().getY(),
                 collider.getHeight(),
                 collider.getWidth(),
                 null);

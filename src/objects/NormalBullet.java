@@ -5,7 +5,7 @@ import java.awt.Color;
 import util.Block;
 
 public class NormalBullet extends Bullet {
-    public NormalBullet(int x, int y) {
+    public NormalBullet(double x, double y) {
         super(x, y);
         this.speed = 20;
         this.collider = new Block(6, 4);

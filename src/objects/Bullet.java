@@ -15,7 +15,7 @@ public abstract class Bullet {
     protected boolean active = true;
     protected Color color;
 
-    public Bullet(int x, int y) {
+    public Bullet(double x, double y) {
         this.position = new Vector(x, y);
     }
 
@@ -24,11 +24,19 @@ public abstract class Bullet {
 
     public void draw(Graphics g) {
         g.setColor(color);
-        g.fillRect(position.getX(), position.getY(), collider.getWidth(), collider.getHeight());
+        g.fillRect(
+            (int) position.getX(), 
+            (int) position.getY(), 
+            collider.getWidth(), 
+            collider.getHeight());
     }
 
     public Rectangle getBounds() {
-        return new Rectangle(position.getX(), position.getY(), collider.getWidth(), collider.getHeight());
+        return new Rectangle(
+            (int) position.getX(), 
+            (int) position.getY(), 
+            collider.getWidth(), 
+            collider.getHeight());
     }
 
     public boolean isActive() {
