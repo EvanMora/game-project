@@ -1,4 +1,4 @@
-package util;
+package zengine.domain;
 
 /*
  * To represent positions on the screen or
@@ -10,6 +10,11 @@ public class Vector {
     public Vector(double x, double y) {
         this.x = x;
         this.y = y;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Vector(x: %f, y: %f)", x, y);
     }
 
     public double getX() {

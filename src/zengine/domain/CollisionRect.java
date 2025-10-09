@@ -1,13 +1,13 @@
-package util;
+package zengine.domain;
 
 /*
  * To represent the collisions and the space
  * of the each object
  */
-public class Block {
+public class CollisionRect {
     private int height, width;
 
-    public Block(int height, int width) {
+    public CollisionRect(int height, int width) {
         this.height = height;
         this.width = width;
     }

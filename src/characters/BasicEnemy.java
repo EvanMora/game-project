@@ -4,9 +4,11 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 
 import javax.swing.ImageIcon;
-import main.GamePanel;
-import util.Block;
-import util.Vector;
+
+import zengine.GamePanel;
+import zengine.domain.CollisionRect;
+import zengine.domain.CharacterBody;
+import zengine.domain.Vector;
 
 /*
  * The most basic enemy than moves right and left
@@ -20,7 +22,7 @@ public class BasicEnemy extends CharacterBody {
     public BasicEnemy(GamePanel gp) {
         this.health = 1;
         this.position = new Vector(32, 32);
-        this.collider = new Block(2 * gp.tileSize, 2 * gp.tileSize);
+        this.collider = new CollisionRect(2 * gp.tileSize, 2 * gp.tileSize);
         this.sprite = new ImageIcon("assets/alien.png").getImage();
         this.gp = gp;
     }

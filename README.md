@@ -16,5 +16,5 @@ git clone https://github.com/EvanMora/game-project.git
 
 2. On the main folder run
 ```bash
-java src/main/Game.java
+java src/Main.java
 ```

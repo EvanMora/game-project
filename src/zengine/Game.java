@@ -1,4 +1,4 @@
-package main;
+package zengine;
 
 import javax.swing.JFrame;
 
@@ -7,7 +7,7 @@ public class Game {
      * Open and set the window and add the principal
      * JPanel GamePanel
      */
-    public static void main(String[] args) {
+    public Game() {
 
         JFrame window = new JFrame("Space Invaders");
         window.setResizable(false);

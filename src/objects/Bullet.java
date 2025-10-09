@@ -4,14 +4,14 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
-import util.Block;
-import util.Vector;
+import zengine.domain.CollisionRect;
+import zengine.domain.Vector;
 
 public abstract class Bullet {
 
     protected Vector position;
     protected int speed;
-    protected Block collider;
+    protected CollisionRect collider;
     protected boolean active = true;
     protected Color color;
 
@@ -51,7 +51,7 @@ public abstract class Bullet {
         return position;
     }
 
-    public Block getCollider() {
+    public CollisionRect getCollider() {
         return collider;
     }
 }

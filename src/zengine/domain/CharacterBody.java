@@ -1,10 +1,7 @@
-package characters;
+package zengine.domain;
 
 import java.awt.Graphics;
 import java.awt.Image;
-
-import util.Block;
-import util.Vector;
 
 public abstract class CharacterBody {
     protected int health;
@@ -12,7 +9,7 @@ public abstract class CharacterBody {
     protected boolean visible = true;
     protected boolean alive = true;
     // Vector velocity;
-    protected Block collider;
+    protected CollisionRect collider;
     protected Image sprite;
 
     public int getHealth() {
@@ -27,7 +24,7 @@ public abstract class CharacterBody {
         return position;
     }
 
-    public Block getCollider() {
+    public CollisionRect getCollider() {
         return collider;
     }
 

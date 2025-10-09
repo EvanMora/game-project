@@ -2,13 +2,13 @@ package objects;
 
 import java.awt.Color;
 
-import util.Block;
+import zengine.domain.CollisionRect;
 
 public class NormalBullet extends Bullet {
     public NormalBullet(double x, double y) {
         super(x, y);
         this.speed = 20;
-        this.collider = new Block(6, 4);
+        this.collider = new CollisionRect(6, 4);
         this.color = new Color(0x6ceded);
     }
 

@@ -1,8 +1,9 @@
-package main;
+package zengine;
 
 import characters.BasicEnemy;
 import characters.Player;
 import objects.Bullet;
+import zengine.controller.KeyHandler;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -13,7 +14,6 @@ import java.util.ArrayList;
 
 import javax.swing.JPanel;
 import javax.swing.Timer;
-import util.KeyHandler;
 
 /*
  * Principal class of the game which define the game loop

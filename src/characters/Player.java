@@ -6,12 +6,13 @@ import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
 import javax.swing.Timer;
 
-import main.GamePanel;
 import objects.Bullet;
 import objects.NormalBullet;
-import util.Block;
-import util.KeyHandler;
-import util.Vector;
+import zengine.GamePanel;
+import zengine.controller.KeyHandler;
+import zengine.domain.CollisionRect;
+import zengine.domain.CharacterBody;
+import zengine.domain.Vector;
 
 public class Player extends CharacterBody {
 
@@ -27,7 +28,7 @@ public class Player extends CharacterBody {
     public Player(GamePanel gp, KeyHandler keyH) {
         this.health = 1;
         this.position = new Vector(32, 32);
-        this.collider = new Block(gp.tileSize, 2 * gp.tileSize);
+        this.collider = new CollisionRect(gp.tileSize, 2 * gp.tileSize);
         this.sprite = new ImageIcon("assets/ship.png").getImage();
         this.keyH = keyH;
         this.gp = gp;
