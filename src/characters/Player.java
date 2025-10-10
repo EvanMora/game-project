@@ -1,9 +1,5 @@
 package characters;
 
-import java.awt.Graphics;
-import java.awt.event.ActionEvent;
-
-import javax.swing.ImageIcon;
 import javax.swing.Timer;
 
 import objects.Bullet;
@@ -11,8 +7,8 @@ import objects.NormalBullet;
 import zengine.GamePanel;
 import zengine.controller.KeyHandler;
 import zengine.domain.CollisionRect;
-import zengine.domain.CharacterBody;
 import zengine.domain.Vector;
+import zengine.domain.entities.CharacterBody;
 
 public class Player extends CharacterBody {
 
@@ -20,7 +16,7 @@ public class Player extends CharacterBody {
 
     int shotDelay = 1000 / 2;
     boolean canShot = true;
-    Timer shotDelayTimer = new Timer(shotDelay, (ActionEvent e) -> canShot = true);
+    Timer shotDelayTimer = new Timer(shotDelay, e -> canShot = true);
 
     GamePanel gp;
     KeyHandler keyH;
@@ -29,13 +25,12 @@ public class Player extends CharacterBody {
         this.health = 1;
         this.position = new Vector(32, 32);
         this.collider = new CollisionRect(gp.tileSize, 2 * gp.tileSize);
-        this.sprite = new ImageIcon("assets/ship.png").getImage();
         this.keyH = keyH;
         this.gp = gp;
     }
 
     @Override
-    public void update() {
+    public void process() {
         // Rect direction movement
         if (keyH.leftPressed && position.getX() - speed >= 0)
             position.setX(position.getX() - speed);
@@ -53,22 +48,6 @@ public class Player extends CharacterBody {
             attack();
     }
 
-    @Override
-    public void draw(Graphics g) {
-        if (!visible)
-            return;
-
-        // Drawing the player
-        g.drawImage(
-                getSprite(),
-                (int) getPosition().getX(),
-                (int) getPosition().getY(),
-                collider.getWidth(),
-                collider.getHeight(),
-                null);
-    }
-
-    @Override
     public void attack() {
         canShot = false;
         shotDelayTimer.start();
@@ -79,6 +58,11 @@ public class Player extends CharacterBody {
 
         b.getPosition().setX(b.getPosition().getX() - b.getCollider().getWidth() / 2);
         gp.addBullet(b);
+    }
+
+    @Override
+    protected String getSpritePath() {
+        return "/assets/ship.png";
     }
 
 }

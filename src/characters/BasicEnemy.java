@@ -1,14 +1,11 @@
 package characters;
 
-import java.awt.Graphics;
 import java.awt.Rectangle;
-
-import javax.swing.ImageIcon;
 
 import zengine.GamePanel;
 import zengine.domain.CollisionRect;
-import zengine.domain.CharacterBody;
 import zengine.domain.Vector;
+import zengine.domain.entities.CharacterBody;
 
 /*
  * The most basic enemy than moves right and left
@@ -23,14 +20,13 @@ public class BasicEnemy extends CharacterBody {
         this.health = 1;
         this.position = new Vector(32, 32);
         this.collider = new CollisionRect(2 * gp.tileSize, 2 * gp.tileSize);
-        this.sprite = new ImageIcon("assets/alien.png").getImage();
         this.gp = gp;
     }
 
     boolean movingRight = true;
 
     @Override
-    public void update() {
+    public void process() {
         // Detects when collide
         if (position.getX() + speed >= (gp.width - collider.getWidth()))
             movingRight = false;
@@ -55,20 +51,8 @@ public class BasicEnemy extends CharacterBody {
     }
 
     @Override
-    public void draw(Graphics g) {
-        if (!visible)
-            return;
-
-        g.drawImage(
-                getSprite(),
-                (int) getPosition().getX(),
-                (int) getPosition().getY(),
-                collider.getHeight(),
-                collider.getWidth(),
-                null);
+    protected String getSpritePath() {
+        return "/assets/alien.png";
     }
 
-    @Override
-    public void attack() {
-    }
 }
