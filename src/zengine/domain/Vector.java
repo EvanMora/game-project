@@ -4,7 +4,7 @@ package zengine.domain;
  * To represent positions on the screen or
  * velocity 
  */
-public class Vector {
+public class Vector extends Object{
     private double x, y;
 
     public Vector(double x, double y) {
@@ -15,6 +15,24 @@ public class Vector {
     @Override
     public String toString() {
         return String.format("Vector(x: %f, y: %f)", x, y);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+
+        if (this == obj) {
+            return true;
+        }
+        
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+
+        Vector v = (Vector) obj;
+        return this.x == v.x && this.y == v.y;
     }
 
     public void set(double x, double y) {
@@ -42,19 +60,22 @@ public class Vector {
         return Math.sqrt(x*x + y*y);
     }
 
-    public void normalize() {
+    public Vector normalize() {
         x /= magnitude();
         y /= magnitude();
+        return this;
     }
 
-    public void add(Vector v) {
+    public Vector add(Vector v) {
         x += v.x;
         y += v.y;
+        return this;
     }
 
-    public void subtract(Vector v) {
+    public Vector subtract(Vector v) {
         x -= v.x;
         y -= v.y;
+        return this;
     }
 
     public Vector product(double scalar) {
