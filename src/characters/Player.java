@@ -32,17 +32,22 @@ public class Player extends CharacterBody {
     @Override
     public void process() {
         // Rect direction movement
-        if (keyH.leftPressed && position.getX() - speed >= 0)
-            position.setX(position.getX() - speed);
+        if (keyH.leftPressed && position.getX() >= 0)
+            velocity.set(-speed, 0);
 
-        else if (keyH.rightPressed && position.getX() + speed <= (gp.width - collider.getWidth()))
-            position.setX(position.getX() + speed);
+        else if (keyH.rightPressed && position.getX() <= (gp.width - collider.getWidth()))
+            velocity.set(speed, 0);
 
-        else if (keyH.upPressed && position.getY() - speed >= 0)
-            position.setY(position.getY() - speed);
+        else if (keyH.upPressed && position.getY()  >= 0)
+            velocity.set(0, -speed);
 
-        else if (keyH.downPressed && position.getY() + speed <= (gp.height - collider.getHeight()))
-            position.setY(position.getY() + speed);
+        else if (keyH.downPressed && position.getY() <= (gp.height - collider.getHeight()))
+            velocity.set(0, speed);
+
+        else
+            velocity = new Vector(0, 0);
+        // velocity = getAxis().product(speed);
+        // System.out.println(velocity.toString());
 
         if (keyH.spacePressed && canShot)
             attack();

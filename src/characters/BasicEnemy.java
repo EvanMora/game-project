@@ -36,9 +36,10 @@ public class BasicEnemy extends CharacterBody {
 
         // Movement
         if (movingRight)
-            position.setX(position.getX() + speed);
+            velocity.setX(speed);
         else
-            position.setX(position.getX() - speed);
+            velocity.setX(-speed);
+            // position.setX(position.getX() - speed);
 
     }
 

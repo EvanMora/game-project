@@ -17,6 +17,11 @@ public class Vector {
         return String.format("Vector(x: %f, y: %f)", x, y);
     }
 
+    public void set(double x, double y) {
+        this.x = x;
+        this.y = y;
+    }
+
     public double getX() {
         return x;
     }
@@ -50,5 +55,11 @@ public class Vector {
     public void subtract(Vector v) {
         x -= v.x;
         y -= v.y;
+    }
+
+    public Vector product(double scalar) {
+        x *= scalar;
+        y *= scalar;
+        return this;
     }
 }

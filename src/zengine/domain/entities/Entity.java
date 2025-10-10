@@ -1,22 +1,20 @@
 package zengine.domain.entities;
 
 import zengine.domain.Vector;
-
-import java.awt.Image;
-import java.io.IOException;
+import zengine.domain.CollisionRect;
 
 import javax.imageio.ImageIO;
+import java.io.IOException;
 
 import java.awt.Graphics;
-
-import zengine.domain.CollisionRect;
+import java.awt.Image;
 
 
 public abstract class Entity {
-    protected Vector position;
+    protected Vector position = new Vector(0, 0);
+    protected Vector velocity = new Vector(0, 0);
     protected boolean visible = true;
-    protected Vector velocity;
-    protected CollisionRect collider;
+    protected CollisionRect collider = new CollisionRect(0, 0);
     protected Image sprite;
 
     public Entity() {
@@ -53,6 +51,8 @@ public abstract class Entity {
     }
 
     public void update() {
+        position.setX(position.getX() + velocity.getX());
+        position.setY(position.getY() + velocity.getY());
         process();
     }
 
