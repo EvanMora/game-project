@@ -25,6 +25,9 @@ public class BasicEnemy extends CharacterBody {
 
     boolean movingRight = true;
 
+    /*
+     * Moves from left to right of the screen
+     */
     @Override
     public void process() {
         // Detects when collide

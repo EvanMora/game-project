@@ -29,9 +29,11 @@ public class Player extends CharacterBody {
         this.gp = gp;
     }
 
+    /*
+     * Four direction movement and space to shot
+     */
     @Override
     public void process() {
-        // Rect direction movement
         if (keyH.leftPressed && position.getX() >= 0)
             velocity.set(-speed, 0);
 
@@ -53,6 +55,9 @@ public class Player extends CharacterBody {
             attack();
     }
 
+    /*
+     * Shot a normal bullet 
+     */
     public void attack() {
         canShot = false;
         shotDelayTimer.start();

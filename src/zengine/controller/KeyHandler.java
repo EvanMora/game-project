@@ -3,7 +3,7 @@ package zengine.controller;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-import zengine.domain.Vector;
+// import zengine.domain.Vector;
 
 public class KeyHandler implements KeyListener {
 
@@ -61,20 +61,20 @@ public class KeyHandler implements KeyListener {
 
     }
 
-    private Vector getAxis() {
-        Vector v = new Vector(0, 0);
-        if (upPressed)
-            v.setY(-1);
-        else if (downPressed)
-            v.setY(1);
-        else if (leftPressed)
-            v.setX(-1);
-        else if (rightPressed)
-            v.setX(1);
+    // private Vector getAxis() {
+    //     Vector v = new Vector(0, 0);
+    //     if (upPressed)
+    //         v.setY(-1);
+    //     else if (downPressed)
+    //         v.setY(1);
+    //     else if (leftPressed)
+    //         v.setX(-1);
+    //     else if (rightPressed)
+    //         v.setX(1);
 
-        v.normalize();
-        return v;
-    }
+    //     v.normalize();
+    //     return v;
+    // }
 
 
 }

@@ -19,7 +19,7 @@ git clone https://github.com/EvanMora/game-project.git
 java src/Main.java
 ```
 
-## How to run te test of the game
+## How to run the tests of the game
 In the project folder run the following command:
 ```bash
 java src/tests/Test.java

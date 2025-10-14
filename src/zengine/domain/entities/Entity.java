@@ -9,7 +9,9 @@ import java.io.IOException;
 import java.awt.Graphics;
 import java.awt.Image;
 
-
+/*
+ * Represents each visible and interactive object of the game
+ */
 public abstract class Entity {
     protected Vector position = new Vector(0, 0);
     protected Vector velocity = new Vector(0, 0);
