@@ -1,11 +1,12 @@
 package characters;
 
-import java.awt.Rectangle;
-
+import objects.Bullet;
+import zengine.Config;
 import zengine.GamePanel;
 import zengine.domain.CollisionRect;
 import zengine.domain.Vector;
 import zengine.domain.entities.CharacterBody;
+import zengine.domain.entities.Entity;
 
 /*
  * The most basic enemy than moves right and left
@@ -17,10 +18,10 @@ public class BasicEnemy extends CharacterBody {
     GamePanel gp;
 
     public BasicEnemy(GamePanel gp) {
+        super(gp);
         this.health = 1;
         this.position = new Vector(32, 32);
-        this.collider = new CollisionRect(2 * gp.tileSize, 2 * gp.tileSize);
-        this.gp = gp;
+        this.collider = new CollisionRect(2 * Config.tileSize, 2 * Config.tileSize);
     }
 
     boolean movingRight = true;
@@ -31,7 +32,7 @@ public class BasicEnemy extends CharacterBody {
     @Override
     public void process() {
         // Detects when collide
-        if (position.getX() + speed >= (gp.width - collider.getWidth()))
+        if (position.getX() + speed >= (Config.width - collider.getWidth()))
             movingRight = false;
 
         if (position.getX() - speed <= 0)
@@ -42,16 +43,13 @@ public class BasicEnemy extends CharacterBody {
             velocity.setX(speed);
         else
             velocity.setX(-speed);
-            // position.setX(position.getX() - speed);
 
     }
 
-    public Rectangle getBounds() {
-        return new Rectangle(
-                (int) position.getX(),
-                (int) position.getY(),
-                collider.getWidth(),
-                collider.getHeight());
+    @Override
+    public void onCollision(Entity other) {
+        if (other instanceof Bullet)
+            this.active = false;
     }
 
     @Override

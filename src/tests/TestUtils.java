@@ -8,7 +8,8 @@ public class TestUtils {
      * Shows a message that indicate if the test were success or not
      * 
      * @param name Indicates the name of the test
-     * @param success The condition to indicates if the test is success 
+     * 
+     * @param success The condition to indicates if the test is success
      */
     public static void check(String name, boolean success) {
         if (success) {

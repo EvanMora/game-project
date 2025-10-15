@@ -1,6 +1,7 @@
 package zengine.domain.entities;
 
 import zengine.domain.Vector;
+import zengine.GamePanel;
 import zengine.domain.CollisionRect;
 
 import javax.imageio.ImageIO;
@@ -8,18 +9,22 @@ import java.io.IOException;
 
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Rectangle;
 
 /*
  * Represents each visible and interactive object of the game
  */
 public abstract class Entity {
+    protected GamePanel gp;
     protected Vector position = new Vector(0, 0);
     protected Vector velocity = new Vector(0, 0);
     protected boolean visible = true;
+    protected boolean active = true;
     protected CollisionRect collider = new CollisionRect(0, 0);
     protected Image sprite;
 
-    public Entity() {
+    public Entity(GamePanel gp) {
+        this.gp = gp;
         try {
             sprite = ImageIO.read(getClass().getResource(getSpritePath()));
         } catch (IOException e) {
@@ -35,8 +40,20 @@ public abstract class Entity {
         this.visible = visible;
     }
 
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
     public Vector getPosition() {
         return position;
+    }
+
+    public CollisionRect getCollider() {
+        return collider;
     }
 
     public void draw(Graphics g) {
@@ -53,11 +70,20 @@ public abstract class Entity {
     }
 
     public void update() {
-        position.setX(position.getX() + velocity.getX());
-        position.setY(position.getY() + velocity.getY());
+        position.add(velocity);
         process();
     }
 
+    public Rectangle getBounds() {
+        return new Rectangle(
+            (int) position.getX(), 
+            (int) position.getY(), 
+            collider.getWidth(), 
+            collider.getHeight());
+    }
+
+    public void onCollision(Entity other) {
+    }
 
     protected abstract String getSpritePath();
     public abstract void process();

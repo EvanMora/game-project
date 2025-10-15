@@ -2,56 +2,40 @@ package objects;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Rectangle;
 
-import zengine.domain.CollisionRect;
 import zengine.domain.Vector;
+import zengine.domain.entities.Entity;
 
-public abstract class Bullet {
-
-    protected Vector position;
+public abstract class Bullet extends Entity {
+    protected Entity owner;
     protected int speed;
-    protected CollisionRect collider;
     protected boolean active = true;
     protected Color color;
 
-    public Bullet(double x, double y) {
+    public Bullet(Entity owner, double x, double y) {
+        super(null);
+        this.owner = owner;
         this.position = new Vector(x, y);
     }
 
-    // Every kind of bullet defines its own movement
-    public abstract void update();
-
+    @Override
     public void draw(Graphics g) {
+        if (!visible) 
+            return;
+
         g.setColor(color);
         g.fillRect(
-            (int) position.getX(), 
-            (int) position.getY(), 
-            collider.getWidth(), 
-            collider.getHeight());
+                (int) position.getX(),
+                (int) position.getY(),
+                collider.getWidth(),
+                collider.getHeight());
     }
 
-    public Rectangle getBounds() {
-        return new Rectangle(
-            (int) position.getX(), 
-            (int) position.getY(), 
-            collider.getWidth(), 
-            collider.getHeight());
-    }
-
-    public boolean isActive() {
-        return active;
-    }
-
-    public void setActive(boolean active) {
-        this.active = active;
-    }
-
-    public Vector getPosition() {
-        return position;
-    }
-
-    public CollisionRect getCollider() {
-        return collider;
+    @Override
+    public void onCollision(Entity other) {
+        if (other == owner) return;
+        this.active = false;
+        this.visible = false;
+        System.out.println("Bullet colliding");
     }
 }
