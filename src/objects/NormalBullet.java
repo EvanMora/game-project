@@ -3,14 +3,17 @@ package objects;
 import java.awt.Color;
 
 import zengine.domain.entities.Entity;
+import zengine.Config;
 import zengine.domain.CollisionRect;
+import zengine.domain.Vector;
 
 public class NormalBullet extends Bullet {
-    public NormalBullet(Entity owner, double x, double y) {
+    public NormalBullet(Entity owner, double x, double y, double angle) {
         super(owner, x, y);
         this.speed = 20;
         this.collider = new CollisionRect(6, 4);
         this.color = new Color(0x6ceded);
+        this.velocity = Vector.directionTo(angle).product(speed);
     }
 
     @Override
@@ -20,9 +23,7 @@ public class NormalBullet extends Bullet {
 
     @Override
     public void process() {
-        velocity.set(0, -speed);
-
-        if (position.getY() < 0)
+        if (position.getY() < 0 || position.getY() > Config.height)
             active = false;
     }
 

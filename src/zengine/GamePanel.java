@@ -1,6 +1,7 @@
 package zengine;
 
 import characters.BasicEnemy;
+import characters.BigEnemy;
 import characters.Player;
 import zengine.controller.EntityManager;
 import zengine.controller.KeyHandler;
@@ -23,6 +24,7 @@ public class GamePanel extends JPanel implements ActionListener {
 
     Player player = new Player(this, keyHandler);
     BasicEnemy enemy = new BasicEnemy(this);
+    BigEnemy bigEnemy = new BigEnemy(this);
 
     public EntityManager eManager = new EntityManager();
 
@@ -34,6 +36,7 @@ public class GamePanel extends JPanel implements ActionListener {
         addKeyListener(keyHandler);
         eManager.add(player);
         eManager.add(enemy);
+        eManager.add(bigEnemy);
 
         gameLoop = new Timer(1000 / 60, this);
 
@@ -50,7 +53,7 @@ public class GamePanel extends JPanel implements ActionListener {
 
         eManager.update();
         eManager.checkCollisions();
-        eManager.getEntities().size();
+        System.out.println(eManager.getEntities().size());
     }
 
     /*

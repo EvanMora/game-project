@@ -15,13 +15,11 @@ public class BasicEnemy extends CharacterBody {
 
     int speed = 3;
 
-    GamePanel gp;
-
     public BasicEnemy(GamePanel gp) {
         super(gp);
         this.health = 1;
         this.position = new Vector(32, 32);
-        this.collider = new CollisionRect(2 * Config.tileSize, 2 * Config.tileSize);
+        this.collider = new CollisionRect(1 * Config.tileSize, 1 * Config.tileSize);
     }
 
     boolean movingRight = true;
@@ -54,7 +52,7 @@ public class BasicEnemy extends CharacterBody {
 
     @Override
     protected String getSpritePath() {
-        return "/assets/alien.png";
+        return "/assets/little_alien.png";
     }
 
 }

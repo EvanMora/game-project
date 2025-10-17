@@ -64,7 +64,8 @@ public class Player extends CharacterBody {
         Bullet b = new NormalBullet(
                 this,
                 position.getX() + collider.getWidth() / 2,
-                position.getY());
+                position.getY(),
+                90);
 
         b.getPosition().setX(b.getPosition().getX() - b.getCollider().getWidth() / 2);
         gp.eManager.add(b);
@@ -72,6 +73,9 @@ public class Player extends CharacterBody {
 
     @Override
     public void onCollision(Entity other) {
+        if (other instanceof Bullet) {
+            active = false;
+        }
     }
 
     @Override

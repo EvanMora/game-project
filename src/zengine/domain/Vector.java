@@ -83,4 +83,9 @@ public class Vector extends Object{
         y *= scalar;
         return this;
     }
+
+    public static Vector directionTo(double angle) {
+        angle *= Math.PI/180;
+        return new Vector(Math.cos(angle), -Math.sin(angle));
+    }
 }

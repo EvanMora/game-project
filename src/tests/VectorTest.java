@@ -15,5 +15,6 @@ public class VectorTest {
                                 v1.subtract(v2).equals(new Vector(3, 4)));
         TestUtils.check("Vector scalar product 2 * (1, 2) = (2, 4)",
                                 v2.product(2).equals(new Vector(2, 4)));
+        TestUtils.check("Direction to 90deg is (0, -1)", Vector.directionTo(90).equals(new Vector(0, -1)));
     }
 }

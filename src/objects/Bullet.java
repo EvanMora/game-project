@@ -9,7 +9,6 @@ import zengine.domain.entities.Entity;
 public abstract class Bullet extends Entity {
     protected Entity owner;
     protected int speed;
-    protected boolean active = true;
     protected Color color;
 
     public Bullet(Entity owner, double x, double y) {
@@ -33,9 +32,8 @@ public abstract class Bullet extends Entity {
 
     @Override
     public void onCollision(Entity other) {
-        if (other == owner) return;
+        if (other == owner) 
+            return;
         this.active = false;
-        this.visible = false;
-        System.out.println("Bullet colliding");
     }
 }
