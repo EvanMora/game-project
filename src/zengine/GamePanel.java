@@ -3,6 +3,7 @@ package zengine;
 import characters.BasicEnemy;
 import characters.BigEnemy;
 import characters.Player;
+import screens.StarsBG;
 import zengine.controller.EntityManager;
 import zengine.controller.KeyHandler;
 
@@ -21,6 +22,8 @@ import javax.swing.Timer;
 public class GamePanel extends JPanel implements ActionListener {
     Timer gameLoop;
     KeyHandler keyHandler = new KeyHandler();
+
+    StarsBG starsBG = new StarsBG();
 
     Player player = new Player(this, keyHandler);
     BasicEnemy enemy = new BasicEnemy(this);
@@ -53,7 +56,8 @@ public class GamePanel extends JPanel implements ActionListener {
 
         eManager.update();
         eManager.checkCollisions();
-        System.out.println(eManager.getEntities().size());
+        starsBG.updateStars();
+        // System.out.println(eManager.getEntities().size());
     }
 
     /*
@@ -64,6 +68,7 @@ public class GamePanel extends JPanel implements ActionListener {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
+        starsBG.draw(g);
         eManager.drawAll(g);
     }
 
