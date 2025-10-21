@@ -11,7 +11,7 @@ public class NormalBullet extends Bullet {
     public NormalBullet(Entity owner, double x, double y, double angle) {
         super(owner, x, y);
         this.speed = 20;
-        this.collider = new CollisionRect(6, 4);
+        this.collider = new CollisionRect(3 * Config.scale, 2 * Config.scale);
         this.color = new Color(0x6ceded);
         this.velocity = Vector.directionTo(angle).product(speed);
     }

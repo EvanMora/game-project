@@ -9,7 +9,7 @@ import zengine.Config;
 import zengine.domain.Vector;
 
 public class StarsBG {
-    private final int numStars = 80;
+    private final int numStars = 150;
     private final Vector[] stars;
     private final int[] speeds;
     private final Random rand = new Random();
@@ -40,7 +40,11 @@ public class StarsBG {
         g.setColor(new Color(108, 237, 237, 70));
 
         for (Vector star : stars) {
-            g.fillRect((int) star.getX(), (int) star.getY(), 2 * Config.scale, 2 * Config.scale);
+            g.fillRect(
+                (int) star.getX(), 
+                (int) star.getY(), 
+                Config.scale, 
+                Config.scale);
         }
     }
 }
