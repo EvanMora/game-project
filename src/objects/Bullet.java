@@ -3,11 +3,12 @@ package objects;
 import java.awt.Color;
 import java.awt.Graphics;
 
+import characters.Enemy;
 import zengine.domain.Vector;
 import zengine.domain.entities.Entity;
 
 public abstract class Bullet extends Entity {
-    protected Entity owner;
+    public Entity owner;
     protected int speed;
     protected Color color;
 
@@ -32,7 +33,7 @@ public abstract class Bullet extends Entity {
 
     @Override
     public void onCollision(Entity other) {
-        if (other == owner) 
+        if (other == owner || (owner instanceof Enemy && other instanceof Enemy)) 
             return;
         this.active = false;
     }

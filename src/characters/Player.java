@@ -25,7 +25,7 @@ public class Player extends CharacterBody {
     public Player(GamePanel gp, KeyHandler keyH) {
         super(gp);
         this.health = 1;
-        this.position = new Vector(32, 32);
+        this.position = new Vector(5 * Config.tileSize, 14 * Config.tileSize);
         this.collider = new CollisionRect(Config.tileSize, 2 * Config.tileSize);
         this.keyH = keyH;
     }
@@ -73,7 +73,9 @@ public class Player extends CharacterBody {
 
     @Override
     public void onCollision(Entity other) {
-        if (other instanceof Bullet) {
+        if (other instanceof Bullet ||
+                other instanceof BasicEnemy ||
+                other instanceof BigEnemy) {
             active = false;
         }
     }

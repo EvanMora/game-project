@@ -57,7 +57,6 @@ public class GamePanel extends JPanel implements ActionListener {
         eManager.update();
         eManager.checkCollisions();
         starsBG.updateStars();
-        // System.out.println(eManager.getEntities().size());
     }
 
     /*

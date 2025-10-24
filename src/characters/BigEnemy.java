@@ -8,16 +8,15 @@ import zengine.Config;
 import zengine.GamePanel;
 import zengine.domain.CollisionRect;
 import zengine.domain.Vector;
-import zengine.domain.entities.CharacterBody;
 import zengine.domain.entities.Entity;
 
-public class BigEnemy extends CharacterBody {
+public class BigEnemy extends Enemy {
     int speed = 3;
     Timer shotDelay = new Timer(2000, e -> shot());
 
     public BigEnemy(GamePanel gp) {
         super(gp);
-        this.health = 1;
+        this.health = 2;
         this.position = new Vector(100, 100);
         this.collider = new CollisionRect(2 * Config.tileSize, 2 * Config.tileSize);
         shotDelay.start();
@@ -45,8 +44,17 @@ public class BigEnemy extends CharacterBody {
     @Override
     public void onCollision(Entity other) {
         if (other instanceof Bullet) {
-            shotDelay.stop();
+            Bullet b = (Bullet) other;
+            if (b.owner instanceof Enemy) return;
+            hurt(1);
+        }
+    }
+
+    public void hurt(int damage) {
+        health -= damage;
+        if (health <= 0) {
             this.active = false;
+            shotDelay.stop();
         }
     }
 
