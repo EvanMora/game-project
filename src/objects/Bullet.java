@@ -33,7 +33,7 @@ public abstract class Bullet extends Entity {
 
     @Override
     public void onCollision(Entity other) {
-        if (other == owner || (owner instanceof Enemy && other instanceof Enemy)) 
+        if (other == owner || (owner instanceof Enemy && other instanceof Enemy) || other instanceof Bullet) 
             return;
         this.active = false;
     }

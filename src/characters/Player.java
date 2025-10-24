@@ -73,9 +73,7 @@ public class Player extends CharacterBody {
 
     @Override
     public void onCollision(Entity other) {
-        if (other instanceof Bullet ||
-                other instanceof BasicEnemy ||
-                other instanceof BigEnemy) {
+        if (other instanceof Bullet || other instanceof Enemy) {
             active = false;
         }
     }

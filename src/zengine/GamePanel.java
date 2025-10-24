@@ -2,6 +2,7 @@ package zengine;
 
 import characters.BasicEnemy;
 import characters.BigEnemy;
+import characters.Crab;
 import characters.Player;
 import screens.StarsBG;
 import zengine.controller.EntityManager;
@@ -28,6 +29,7 @@ public class GamePanel extends JPanel implements ActionListener {
     Player player = new Player(this, keyHandler);
     BasicEnemy enemy = new BasicEnemy(this);
     BigEnemy bigEnemy = new BigEnemy(this);
+    Crab crab = new Crab(this);
 
     public EntityManager eManager = new EntityManager();
 
@@ -40,6 +42,7 @@ public class GamePanel extends JPanel implements ActionListener {
         eManager.add(player);
         eManager.add(enemy);
         eManager.add(bigEnemy);
+        eManager.add(crab);
 
         gameLoop = new Timer(1000 / 60, this);
 
