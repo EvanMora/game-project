@@ -11,7 +11,7 @@ import zengine.domain.Vector;
 import zengine.domain.entities.Entity;
 
 public class BigEnemy extends Enemy {
-    int speed = 3;
+    int speed = 4;
     Timer shotDelay = new Timer(2000, e -> shot());
 
     public BigEnemy(GamePanel gp) {
@@ -27,17 +27,19 @@ public class BigEnemy extends Enemy {
     @Override
     public void process() {
         // Detects when collide
-        if (position.getX() + speed >= (Config.width - collider.getWidth()))
+        if (position.getX() >= (Config.width - collider.getWidth()))
             movingRight = false;
 
-        if (position.getX() - speed <= 0)
+        if (position.getX() <= 0)
             movingRight = true;
 
         // Movement
         if (movingRight)
-            velocity.setX(speed);
-        else
-            velocity.setX(-speed);
+            velocity = Vector.directionTo(-5).product(speed);
+        else {
+            velocity = Vector.directionTo(-5).product(speed);
+            velocity.setX(-velocity.getX());
+        }
         
     }
 
@@ -64,7 +66,6 @@ public class BigEnemy extends Enemy {
                 position.getY() + collider.getHeight(), 
                 270);
 
-        b.getPosition().setX(b.getPosition().getX() - b.getCollider().getWidth() / 2);
         gp.eManager.add(b);
     }
 

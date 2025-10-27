@@ -4,6 +4,7 @@ import characters.BasicEnemy;
 import characters.BigEnemy;
 import characters.Crab;
 import characters.Player;
+import characters.SharkBoss.SharkBoss;
 import screens.StarsBG;
 import zengine.controller.EntityManager;
 import zengine.controller.KeyHandler;
@@ -27,9 +28,10 @@ public class GamePanel extends JPanel implements ActionListener {
     StarsBG starsBG = new StarsBG();
 
     Player player = new Player(this, keyHandler);
+    // SharkBoss sharkBoss = new SharkBoss(this, player);
     BasicEnemy enemy = new BasicEnemy(this);
-    BigEnemy bigEnemy = new BigEnemy(this);
-    Crab crab = new Crab(this);
+    // BigEnemy bigEnemy = new BigEnemy(this);
+    // Crab crab = new Crab(this);
 
     public EntityManager eManager = new EntityManager();
 
@@ -40,9 +42,10 @@ public class GamePanel extends JPanel implements ActionListener {
         requestFocus();
         addKeyListener(keyHandler);
         eManager.add(player);
+        // eManager.add(sharkBoss);
         eManager.add(enemy);
-        eManager.add(bigEnemy);
-        eManager.add(crab);
+        // eManager.add(bigEnemy);
+        // eManager.add(crab);
 
         gameLoop = new Timer(1000 / 60, this);
 

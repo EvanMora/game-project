@@ -10,6 +10,7 @@ import zengine.domain.Vector;
 public class NormalBullet extends Bullet {
     public NormalBullet(Entity owner, double x, double y, double angle) {
         super(owner, x, y);
+        this.getPosition().setX(this.getPosition().getX() - this.getCollider().getWidth() / 2);
         this.speed = 20;
         this.collider = new CollisionRect(3 * Config.scale, 2 * Config.scale);
         this.color = new Color(0x6ceded);
