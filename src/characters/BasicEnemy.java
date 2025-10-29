@@ -24,8 +24,13 @@ public class BasicEnemy extends Enemy {
     int func = 1;
 
     Timer moveChange = new Timer(10_000, e -> {
-        if (func == 2) func = 1;
-        else func++;
+        if (func == 2) {
+            func = 1;
+            position.setY(550);
+        } else {
+            func++;
+            position.setY(0);
+        }
     });
 
     public BasicEnemy(GamePanel gp) {
@@ -33,6 +38,7 @@ public class BasicEnemy extends Enemy {
         this.health = 1;
         this.position = new Vector(32, 32);
         this.collider = new CollisionRect(1 * Config.tileSize, 1 * Config.tileSize);
+        position.setY(550);
         moveChange.start();
     }
 
@@ -49,6 +55,10 @@ public class BasicEnemy extends Enemy {
             }
 
             case State.ATTACK -> {
+                // velocity.set(1, moveFunction(position.getX()));
+                // velocity.normalize(); 
+                // velocity.product(speed);
+
                 // Detects when collide
                 if (position.getX() >= 14 * Config.tileSize)
                     movingRight = false;
@@ -58,12 +68,13 @@ public class BasicEnemy extends Enemy {
 
                 // Movement
                 if (movingRight)
+                    // velocity.setX(velocity.getX());
                     velocity.setX(speed);
                 else
+                    // velocity.setX(-velocity.getX());
                     velocity.setX(-speed);
 
                 position.setY(moveFunction(position.getX()));
-        
             }
         }
     }
@@ -71,8 +82,10 @@ public class BasicEnemy extends Enemy {
     private double moveFunction(double x) {
         if (func == 1)
             return 150 * Math.sin(x/40) + 550;
+            // return (150 * Math.cos(x/40)) / 40;
         
-        return -Math.pow(position.getX() - (Config.width/2), 2)/170 + 690;
+        return -Math.pow(x - 384, 2)/170 + 690;
+        // return -(x - 389)/85;
     }
 
     @Override

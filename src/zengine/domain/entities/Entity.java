@@ -51,6 +51,14 @@ public abstract class Entity {
     public Vector getPosition() {
         return position;
     }
+    
+    public Vector getVelocity() {
+        return velocity;
+    }
+
+    public GamePanel getGp() {
+        return gp;
+    }
 
     public CollisionRect getCollider() {
         return collider;

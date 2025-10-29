@@ -25,7 +25,7 @@ public class Player extends CharacterBody {
     public Player(GamePanel gp, KeyHandler keyH) {
         super(gp);
         this.health = 1;
-        this.position = new Vector(5 * Config.tileSize, 14 * Config.tileSize);
+        this.position = new Vector(5 * Config.tileSize, 12 * Config.tileSize);
         this.collider = new CollisionRect(Config.tileSize, 2 * Config.tileSize);
         this.keyH = keyH;
     }

@@ -28,10 +28,10 @@ public class GamePanel extends JPanel implements ActionListener {
     StarsBG starsBG = new StarsBG();
 
     Player player = new Player(this, keyHandler);
-    // SharkBoss sharkBoss = new SharkBoss(this, player);
-    BasicEnemy enemy = new BasicEnemy(this);
+    SharkBoss sharkBoss = new SharkBoss(this, player);
+    // BasicEnemy enemy = new BasicEnemy(this);
     // BigEnemy bigEnemy = new BigEnemy(this);
-    // Crab crab = new Crab(this);
+    // Crab crab = new Crab(this, player.getPosition().getY());
 
     public EntityManager eManager = new EntityManager();
 
@@ -42,8 +42,8 @@ public class GamePanel extends JPanel implements ActionListener {
         requestFocus();
         addKeyListener(keyHandler);
         eManager.add(player);
-        // eManager.add(sharkBoss);
-        eManager.add(enemy);
+        eManager.add(sharkBoss);
+        // eManager.add(enemy);
         // eManager.add(bigEnemy);
         // eManager.add(crab);
 

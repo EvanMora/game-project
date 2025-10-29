@@ -6,22 +6,20 @@ import zengine.GamePanel;
 import zengine.domain.CollisionRect;
 import zengine.domain.Vector;
 
-import javax.swing.Timer;
-
 import characters.Enemy;
 import characters.Player;
 import objects.Bullet;
-import objects.NormalBullet;
 
 enum State {
     LASER,
-    SHOT    
+    SHOT,
+    SPAWN 
 }
 
 public class SharkBoss extends Enemy {
     Player player;
     State currenState = State.SHOT;
-    Timer shotDelay = new Timer(1000, e -> shot());
+    ShotingState shotingState = new ShotingState(this);
 
     int speed = 4;
 
@@ -31,7 +29,6 @@ public class SharkBoss extends Enemy {
         this.position = new Vector(100, 100);
         this.collider = new CollisionRect(3 * Config.tileSize, 2 * Config.tileSize);
         this.player = player;
-        shotDelay.start();
     }
 
     boolean movingRight = false;
@@ -39,35 +36,24 @@ public class SharkBoss extends Enemy {
     public void process() {
         switch (currenState) {
             case State.SHOT -> {
-                if (position.getX() + speed >= (Config.width - collider.getWidth()))
-                    movingRight = false;
+                shotingState.process();
 
-                if (position.getX() - speed <= 0)
-                    movingRight = true;
+                if (health < 15) {
+                    currenState = State.LASER;
+                    shotingState.stop();
+                }
+            }
 
-                if (movingRight)
-                    velocity.setX(speed);
-                else
-                    velocity.setX(-speed);
-                
+            case State.LASER -> {
+
+            }
+
+            case State.SPAWN -> {
+
             }
         }
         
-        // position.setX(player.getPosition().getX());
         position.setY(50 * Math.sin(position.getX() / 100) + 100);
-    }
-
-    public void shot() {
-        double x = position.getX() + collider.getWidth() / 2;
-        double y = position.getY() + collider.getHeight();
-
-        Bullet a = new NormalBullet(this, x, y, 270);
-        Bullet b = new NormalBullet(this, x, y, 250);
-        Bullet c = new NormalBullet(this, x, y, 290);
-
-        gp.eManager.add(a);
-        gp.eManager.add(b);
-        gp.eManager.add(c);
     }
 
     @Override
