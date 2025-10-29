@@ -17,6 +17,16 @@ public class NormalBullet extends Bullet {
         this.velocity = Vector.directionTo(angle).product(speed);
     }
 
+    public NormalBullet(Entity owner, double x, double y, int width, double angle) {
+        super(owner, x, y);
+        this.speed = 20;
+        this.collider = new CollisionRect(3 * Config.scale, width);
+        this.getPosition().setX(this.getPosition().getX() - this.getCollider().getWidth() / 2);
+        this.color = new Color(0x6ceded);
+        this.velocity = Vector.directionTo(angle).product(speed);
+    }
+
+
     @Override
     protected String getSpritePath() {
         return "/assets/ship.png";

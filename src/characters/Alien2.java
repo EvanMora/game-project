@@ -68,22 +68,22 @@ public class Alien2 extends Enemy {
 
         //Control del disparo doble y pausas
         if (!isShooting && currentTime - lastShotTime > TIME_BETWEEN_ATTACKS + Math.random() * ATTACK_RANDOM_EXTRA) {
-        isShooting = true;
-        stopStartTime = currentTime;
-        hasSecondShot = false; // reiniciamos el segundo disparo
-        shot(); // primer disparo
-        lastShotTime = currentTime;
+            isShooting = true;
+            stopStartTime = currentTime;
+            hasSecondShot = false; // reiniciamos el segundo disparo
+            shot(); // primer disparo
+            lastShotTime = currentTime;
         }
 
         // Segundo disparo una sola vez después de un tiempo
         if (isShooting && !hasSecondShot && currentTime - stopStartTime > BETWEEN_SHOTS) {
-        shot();
-        hasSecondShot = true;
+            shot();
+            hasSecondShot = true;
         }
 
         // Luego de quedarse quieto un tiempo, reanuda el movimiento
         if (isShooting && currentTime - stopStartTime > STOP_DURATION) {
-        isShooting = false;
+            isShooting = false;
         }
     }
 

@@ -20,6 +20,7 @@ public class SharkBoss extends Enemy {
     Player player;
     State currenState = State.SHOT;
     ShotingState shotingState = new ShotingState(this);
+    LaserState laserState;
 
     int speed = 4;
 
@@ -29,6 +30,7 @@ public class SharkBoss extends Enemy {
         this.position = new Vector(100, 100);
         this.collider = new CollisionRect(3 * Config.tileSize, 2 * Config.tileSize);
         this.player = player;
+        this.laserState = new LaserState(this, player, false);
     }
 
     boolean movingRight = false;
@@ -40,12 +42,13 @@ public class SharkBoss extends Enemy {
 
                 if (health < 15) {
                     currenState = State.LASER;
+                    laserState.movingRight = movingRight;
                     shotingState.stop();
                 }
             }
 
             case State.LASER -> {
-
+                laserState.process();
             }
 
             case State.SPAWN -> {

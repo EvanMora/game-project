@@ -8,7 +8,7 @@ import zengine.Config;
 
 public class ShotingState {
     SharkBoss owner;
-    int speed = 3;
+    int speed = 4;
 
     Timer shotDelay = new Timer(1000, e -> shot());
 
