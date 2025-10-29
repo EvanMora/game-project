@@ -12,7 +12,7 @@ public class Alien2 extends Enemy {
 
     private int speed = 6;
 
-    // Control del disparo y movimiento
+    // Shot control and movement//
     private long lastShotTime = 0;
     private boolean isShooting = false;
     private long stopStartTime = 0;
@@ -20,11 +20,11 @@ public class Alien2 extends Enemy {
     private boolean hasSecondShot = false;
 
     // Parámetros 
-    private final long START_DELAY = 2000;   // tiempo antes de que empiece a disparar (ms)
-    private final long STOP_DURATION = 500; // cuánto tiempo se queda quieto al disparar (ms)
-    private final long BETWEEN_SHOTS = 100;  // tiempo entre los dos disparos (ms)
-    private final long TIME_BETWEEN_ATTACKS = 3000; // tiempo entre pausas/disparos (ms)
-    private final long ATTACK_RANDOM_EXTRA = 3000;  // variación aleatoria (ms)
+    private final long START_DELAY = 2000;   // Time before it starts to shoot (ms)
+    private final long STOP_DURATION = 500; // How much time it stays still before shooting (ms)
+    private final long BETWEEN_SHOTS = 100;  // Time between shots (ms)
+    private final long TIME_BETWEEN_ATTACKS = 3000; // time between pauses/shots (ms)
+    private final long ATTACK_RANDOM_EXTRA = 3000;  // random variation (ms)
 
     public Alien2(GamePanel gp) {
         super(gp);
@@ -34,11 +34,11 @@ public class Alien2 extends Enemy {
         this.creationTime = System.currentTimeMillis();
     }
 
-    //Disparo doble con separación visible
+    //Double shooting with visible separation
     public void shot() {
         double x = position.getX() + collider.getWidth() / 2;
         double y = position.getY() + collider.getHeight();
-        double offset = 15; // separación horizontal entre balas
+        double offset = 15; // horizontal separation between bullets
 
         Bullet a = new NormalBullet(this, x - offset, y, 270);
         Bullet b = new NormalBullet(this, x + offset, y, 270);
@@ -51,37 +51,37 @@ public class Alien2 extends Enemy {
     public void process() {
         long currentTime = System.currentTimeMillis();
 
-        //Al inicio solo se mueve, no dispara
+        //In the beggining it just moves, doesn't shoot
         if (currentTime - creationTime < START_DELAY) {
             moveOscillating(speed, 50, 20, 0.002);
             return;
         }
 
-        //Movimiento normal si no está disparando
+        //Normal movement if it's not shooting
         if (!isShooting) {
             moveOscillating(speed, 50, 20, 0.002);
         } else {
-            // Quieto mientras dispara
+            // Still while it shoots
             velocity.setX(0);
             velocity.setY(0);
         }
 
-        //Control del disparo doble y pausas
+        //Double shooting and pauses control
         if (!isShooting && currentTime - lastShotTime > TIME_BETWEEN_ATTACKS + Math.random() * ATTACK_RANDOM_EXTRA) {
             isShooting = true;
             stopStartTime = currentTime;
-            hasSecondShot = false; // reiniciamos el segundo disparo
-            shot(); // primer disparo
+            hasSecondShot = false; // the second shot restarts
+            shot(); // first shot
             lastShotTime = currentTime;
         }
 
-        // Segundo disparo una sola vez después de un tiempo
+        // Second shot one time after the first shot
         if (isShooting && !hasSecondShot && currentTime - stopStartTime > BETWEEN_SHOTS) {
             shot();
             hasSecondShot = true;
         }
 
-        // Luego de quedarse quieto un tiempo, reanuda el movimiento
+        // After being still for a while, continues moving
         if (isShooting && currentTime - stopStartTime > STOP_DURATION) {
             isShooting = false;
         }
