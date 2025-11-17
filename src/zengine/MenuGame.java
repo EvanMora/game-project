@@ -1,8 +1,19 @@
 package zengine;
 
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.FontMetrics;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.io.FileInputStream;
 import java.util.Random;
+
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JPanel;
+import javax.swing.Timer;
 
 import screens.StarsBG;
 
@@ -10,46 +21,51 @@ public class MenuGame extends JPanel {
 
     private Game mainGame;
 
-    // Fondo animado de estrellas (tu clase)
     private StarsBG starsBG = new StarsBG();
+    private Font font;
 
-    // ---- NAVE ANIMADA EN ZIG-ZAG DIAGONAL ----
+    // Ship data
     private int shipX = -60;
-    private int shipY = 200;       // posición inicial Y
-    private int shipSpeedX = 4;    // velocidad horizontal
-    private int shipSpeedY = 2;    // velocidad vertical
-    private int dirY = 1;          // dirección Y (+1 abajo, -1 arriba)
-
-    // Imagen de la nave (reemplaza el dibujo pixel art)
+    private int shipY = 200;
+    private int shipSpeedX = 4;
+    private int shipSpeedY = 2;
+    private int dirY = 1;
     private Image shipImage;
+
 
     public MenuGame(Game mainGame) {
         this.mainGame = mainGame;
         setLayout(null);
         setFocusable(true);
 
-        // Cargar la imagen del PNG (ajusta la ruta si es necesario)
+        // Load the image and the font
         try {
-            shipImage = new ImageIcon(getClass().getResource("/assets/crab.png")).getImage();
+            shipImage = new ImageIcon(getClass().getResource("/assets/little_alien.png")).getImage();
         } catch (Exception e) {
             System.err.println("Error cargando la imagen de la nave: " + e.getMessage());
-            // Opcional: puedes usar una imagen por defecto o manejar el error de otra forma
+        }
+        try {
+            font = Font.createFont(Font.TRUETYPE_FONT, new FileInputStream("assets/font/PixelOperator8-Bold.ttf"));
+            font = font.deriveFont(Font.PLAIN, 40);
+        } catch (Exception e) {
+            System.out.println("Font didn't load correctly");
+            font = new Font("Monospaced", Font.BOLD, 48);
         }
 
-        // === BOTÓN START (pixel-art) ===
+        // Start button
         JButton start = new JButton("START");
         start.setBounds(280, 350, 200, 60);
-        start.setFont(new Font("Monospaced", Font.BOLD, 24));
+        start.setFont(font.deriveFont(Font.PLAIN, 24));
         start.setBackground(new Color(0x6e5181));
         start.setForeground(new Color(0x6ceded));
         start.setBorder(BorderFactory.createLineBorder(new Color(0x0d001a)));
         start.addActionListener(e -> mainGame.startGame());
         add(start);
 
-        // === BOTÓN EXIT ===
+        // Exit button
         JButton exit = new JButton("EXIT");
         exit.setBounds(280, 430, 200, 60);
-        exit.setFont(new Font("Monospaced", Font.BOLD, 24));
+        exit.setFont(font.deriveFont(Font.PLAIN, 24));
         exit.setBackground(new Color(0x6e5181));
         exit.setForeground(new Color(0x6ceded));
         exit.setBorder(BorderFactory.createLineBorder(new Color(0x0d001a)));
@@ -60,24 +76,21 @@ public class MenuGame extends JPanel {
         new Timer(16, e -> animate()).start();
     }
 
-    /* ============================================================
-                           ANIMACIÓN COMPLETA
-       ============================================================ */
+    /* Animations ship and stars */
     private void animate() {
 
-        // Estrellas usando tu clase
         starsBG.updateStars();
 
-        // ---- NAVE EN ZIG-ZAG DIAGONAL ----
+        // Ship Animation
         shipX += shipSpeedX;
         shipY += shipSpeedY * dirY;
 
-        // Cambia dirección al tocar límites Y
+        // Change the direction when touch the limits
         if (shipY < 200 || shipY > 600) {
             dirY *= -1;
         }
 
-        // Cuando salga a la derecha, reinicia
+        // When the ship is out of the screen reload animation
         if (shipX > 820) {
             shipX = -60;
             shipY = 200 + new Random().nextInt(400); // reinicio aleatorio vertical (200 a 600)
@@ -87,36 +100,26 @@ public class MenuGame extends JPanel {
         repaint();
     }
 
-    /* ============================================================
-                                DIBUJO
-       ============================================================ */
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         
-
-        // Fondo
+        // Background
         g.setColor(new Color(0x0d001a));
         g.fillRect(0, 0, getWidth(), getHeight());
 
-        // Estrellas animadas (tu clase)
         starsBG.draw(g);
         
-
-        // TÍTULO ESTILO 16 BITS
         drawTitle(g);
 
-        // NAVE CON PNG (zig-zag diagonal)
         drawShip((Graphics2D) g, shipX, shipY);
     }
 
-    /* ============================================================
-                        TÍTULO ESTILO RETRO
-       ============================================================ */
+    // Draw the titles of the game
     private void drawTitle(Graphics g) {
-        g.setFont(new Font("Monospaced", Font.BOLD, 48));
 
-        // Glow
+        g.setFont(font);
+
         g.setColor(new Color(0x6ceded));
         drawCentered(g, "GALACTIC INVADERS", getWidth(), 150);
 
@@ -130,45 +133,10 @@ public class MenuGame extends JPanel {
         g.drawString(text, x, y);
     }
 
-    /* ============================================================
-                 NAVE CON PNG – ANIMACIÓN ZIG-ZAG DIAGONAL
-       ============================================================ */
     private void drawShip(Graphics2D g2, int x, int y) {
-        // Si la imagen se cargó correctamente, dibujarla
-        if (shipImage != null) {
-            // Cambia estos valores para ajustar el tamaño de la nave
-            int shipWidth = 60;  // Ancho deseado en píxeles
-            int shipHeight = 45; // Alto deseado en píxeles
+        int shipWidth = Config.tileSize;
+        int shipHeight = Config.tileSize;
             
-            g2.drawImage(shipImage, x, y, shipWidth, shipHeight, this);  // Dibuja el PNG escalado
-        } else {
-            // Fallback: si no hay imagen, dibuja la nave original (opcional, para evitar errores)
-            Color body = new Color(0, 240, 255);
-            Color cockpit = new Color(255, 80, 200);
-
-            g2.setColor(body);
-
-            // --- CUERPO PRINCIPAL ---
-            g2.fillRect(x + 10, y, 20, 6);
-            g2.fillRect(x + 6, y + 6, 28, 6);
-            g2.fillRect(x + 2, y + 12, 36, 6);
-            g2.fillRect(x, y + 18, 40, 8);
-
-            // --- ALAS ---
-            g2.fillRect(x - 10, y + 18, 10, 4);
-            g2.fillRect(x + 40, y + 18, 10, 4);
-
-            // --- PUNTA ---
-            g2.fillRect(x + 14, y - 6, 12, 6);
-
-            // --- CABINA ---
-            g2.setColor(cockpit);
-            g2.fillRect(x + 14, y + 6, 12, 8);
-
-            // --- LUCES ---
-            g2.setColor(Color.WHITE);
-            g2.fillRect(x + 8, y + 24, 4, 4);
-            g2.fillRect(x + 28, y + 24, 4, 4);
-        }
+        g2.drawImage(shipImage, x, y, shipWidth, shipHeight, this);  // Dibuja el PNG escalado
     }
 }
