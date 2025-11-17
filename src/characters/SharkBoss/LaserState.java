@@ -56,9 +56,10 @@ public class LaserState {
         }
     }
 
-    private void stop() {
+    public void stop() {
         laserTime.stop();
     }
+
     private void shot() {
         Bullet b = new NormalBullet(owner, 
                 owner.getPosition().getX() + owner.getCollider().getWidth() / 2,

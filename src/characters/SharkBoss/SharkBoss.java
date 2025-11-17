@@ -21,7 +21,7 @@ public class SharkBoss extends Enemy {
     State currenState = State.SHOT;
     ShotingState shotingState = new ShotingState(this);
     LaserState laserState;
-
+    SpawnState spawnState = new SpawnState(this, false);
     int speed = 4;
 
     public SharkBoss(GamePanel gp, Player player) {
@@ -49,10 +49,17 @@ public class SharkBoss extends Enemy {
 
             case State.LASER -> {
                 laserState.process();
+                
+                if (health < 10) {
+                    laserState.stop();
+                    currenState = State.SPAWN;
+                    spawnState.movingRight = movingRight;
+                    spawnState.start();
+                }
             }
 
             case State.SPAWN -> {
-
+                spawnState.process();
             }
         }
         
@@ -72,6 +79,7 @@ public class SharkBoss extends Enemy {
         health -= damage;
         if (health <= 0) {
             this.active = false;
+            if (currenState == State.SPAWN) spawnState.stop();
         }
     }
 

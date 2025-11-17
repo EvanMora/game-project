@@ -9,7 +9,7 @@ import zengine.Config;
 import zengine.domain.Vector;
 
 public class StarsBG {
-    private final int numStars = 150;
+    private final int numStars = 250;
     private final Vector[] stars;
     private final int[] speeds;
     private final Random rand = new Random();
