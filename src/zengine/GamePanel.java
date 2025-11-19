@@ -1,5 +1,8 @@
 package zengine;
 
+
+
+
 import characters.Alien2;
 import characters.BasicEnemy;
 import characters.BigEnemy;
@@ -23,6 +26,8 @@ import javax.swing.Timer;
  * Principal class of the game which define the game loop
  */
 public class GamePanel extends JPanel implements ActionListener {
+    private Game mainGame; // --> 1. AÑADIDO: Referencia a la clase Game principal.
+
     Timer gameLoop;
     KeyHandler keyHandler = new KeyHandler();
 
@@ -30,14 +35,17 @@ public class GamePanel extends JPanel implements ActionListener {
 
     Player player = new Player(this, keyHandler);
     SharkBoss sharkBoss = new SharkBoss(this, player);
-    // BasicEnemy enemy = new BasicEnemy(this);
-    // BigEnemy bigEnemy = new BigEnemy(this);
+    //BasicEnemy enemy = new BasicEnemy(this);
+    //BigEnemy bigEnemy = new BigEnemy(this);
     // Alien2 alien2 = new Alien2(this);
-    // Crab crab = new Crab(this, player.getPosition().getX());
+    //Crab crab = new Crab(this);
 
     public EntityManager eManager = new EntityManager();
 
-    public GamePanel() {
+    // --> 2. MODIFICADO: El constructor ahora recibe la instancia de Game.
+    public GamePanel(Game mainGame) {
+        this.mainGame = mainGame; // --> Se guarda la referencia.
+
         setBackground(new Color(0x0d001a));
         setPreferredSize(new Dimension(Config.width, Config.height));
         setFocusable(true);
@@ -45,10 +53,10 @@ public class GamePanel extends JPanel implements ActionListener {
         addKeyListener(keyHandler);
         eManager.add(player);
         // eManager.add(alien2);
-        // eManager.add(enemy);
+        //eManager.add(enemy);
         eManager.add(sharkBoss);
-        // eManager.add(crab);
-        // eManager.add(bigEnemy);
+        //eManager.add(crab);
+        //eManager.add(bigEnemy);
 
         gameLoop = new Timer(1000 / 60, this);
 
@@ -61,6 +69,14 @@ public class GamePanel extends JPanel implements ActionListener {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
+        //The logic for checking if the game is over.
+        // The Player class has a getLives() and getScore() method.
+        if (player.getLives() <= 0) {
+            gameLoop.stop(); // Detiene el bucle de este panel.
+            mainGame.showGameOver(player.getScore()); // Llama al método de Game para cambiar de pantalla.
+            return; // Sale del método para no ejecutar más lógica del juego.
+        }
+
         repaint();
 
         eManager.update();

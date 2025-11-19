@@ -1,7 +1,6 @@
 package characters;
 
 import javax.swing.Timer;
-
 import objects.Bullet;
 import objects.NormalBullet;
 import zengine.Config;
@@ -14,8 +13,10 @@ import zengine.domain.entities.Entity;
 
 public class Player extends CharacterBody {
 
-    int speed = 8;
+    private int lives;
+    private int score;
 
+    int speed = 8;
     int shotDelay = 1000 / 2;
     boolean canShot = true;
     Timer shotDelayTimer = new Timer(shotDelay, e -> canShot = true);
@@ -24,17 +25,25 @@ public class Player extends CharacterBody {
 
     public Player(GamePanel gp, KeyHandler keyH) {
         super(gp);
-        this.health = 1;
         this.position = new Vector(5 * Config.tileSize, 12 * Config.tileSize);
         this.collider = new CollisionRect(Config.tileSize, 2 * Config.tileSize);
         this.keyH = keyH;
+        
+        setDefaultValues();
+    }
+    
+    public void setDefaultValues() {
+        
+        this.lives = 1;  // The player now starts with only 1 life.
+        this.score = 0;
+        this.active = true; // Make sure the player is active when starting/restarting.
+        this.position.set(5 * Config.tileSize, 12 * Config.tileSize);
     }
 
-    /*
-     * Four direction movement and space to shot
-     */
     @Override
     public void process() {
+        if (!active) return; // Si no está activo, no procesar movimiento.
+
         if (keyH.leftPressed && position.getX() >= 0)
             velocity.set(-speed, 0);
 
@@ -54,9 +63,6 @@ public class Player extends CharacterBody {
             attack();
     }
 
-    /*
-     * Shot a normal bullet
-     */
     public void attack() {
         canShot = false;
         shotDelayTimer.start();
@@ -74,13 +80,32 @@ public class Player extends CharacterBody {
     @Override
     public void onCollision(Entity other) {
         if (other instanceof Bullet || other instanceof Enemy) {
-            active = false;
+            takeDamage();
         }
+    }
+
+    public void takeDamage() {
+        this.lives--; // Subtract the only life the player has.
+
+        if (this.lives <= 0) {
+            this.active = false; // The player becomes inactive.
+        }
+    }
+    
+    public void addScore(int points) {
+        this.score += points;
+    }
+
+    public int getLives() {
+        return lives;
+    }
+
+    public int getScore() {
+        return score;
     }
 
     @Override
     protected String getSpritePath() {
         return "/assets/ship.png";
     }
-
 }
